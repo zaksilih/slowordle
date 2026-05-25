@@ -64,9 +64,11 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ success: true }, { status: 201 });
-  } catch {
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : "Unknown error";
+    console.error("Register error:", e);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: message },
       { status: 500 }
     );
   }
