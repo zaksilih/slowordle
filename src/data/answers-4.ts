@@ -1,0 +1,23 @@
+// Curated list of common 4-letter Slovenian words used as daily puzzle answers
+export const ANSWERS_4: string[] = [
+  "delo", "igra", "čelo", "voda", "hiša", "drvo", "list", "roka", "noga", "usta",
+  "telo", "glad", "svet", "cvet", "noht", "moža", "žena", "obraz", "riba", "potk",
+  "kraj", "vrat", "plod", "grad", "okno", "hrib", "obrt", "grob", "most", "glas",
+  "oder", "boek", "prav", "sled", "kruh", "krog", "orel", "oreh", "ovca", "gora",
+  "meso", "jedi", "luči", "plug", "črka", "grad", "gost", "list", "lonc", "ples",
+  "doma", "prah", "smer", "greh", "vnuk", "tisk", "skok", "past", "zima", "jama",
+  "brat", "laik", "vals", "poti", "park", "stol", "obok", "vrba", "klan", "film",
+  "žaba", "slap", "obok", "olje", "tank", "rast", "polt", "volk", "šola", "miza",
+  "kolo", "krik", "kino", "peta", "vest", "teza", "igla", "umet", "prst", "pest",
+  "sloj", "valj", "trak", "izba", "soba", "mast", "drog", "polk", "kelp", "reis",
+  "pika", "vino", "žica", "ruda", "mlin", "trta", "vrag", "dvor", "osem", "kvas",
+  "aber", "teža", "stan", "lepo", "novo", "čist", "slan", "vetr", "pisk", "klop",
+  "žleb", "bris", "pust", "trda", "rdeč", "plat", "vzor", "pred", "upor", "znak",
+  "tlak", "šest", "stik", "sila", "cilj", "dlan", "zvok", "trak", "sneg", "drek",
+  "skup", "gumb", "blok", "tram", "kava", "roža", "ples", "dars", "kozo", "grič",
+  "modr", "kmet", "obup", "bolj", "glas", "šiva", "čast", "loža", "chef", "žlič",
+  "odor", "štev", "svet", "kaos", "blag", "sklp", "žleb", "žold", "pena", "tvor",
+  "grom", "spol", "vzor", "klan", "čmrl", "plen", "klet", "toča", "svet", "vrst",
+  "štor", "vzor", "volt", "jamo", "okit", "dojk", "čelj", "beli", "črni", "tlas",
+  "skrb", "stik", "usta", "skok", "gost", "koža", "čast", "sluh", "plaz", "zrak",
+];

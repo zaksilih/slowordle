@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  username      String?   @unique
+  passwordHash  String?
+  image         String?
+  createdAt     DateTime  @default(now())
+  streak        Int       @default(0)
+  maxStreak     Int       @default(0)
+
+  accounts      Account[]
+  gameAttempts  GameAttempt[]
+  ownedGroups   Group[]        @relation("GroupOwner")
+  memberships   GroupMember[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model DailyPuzzle {
+  id           String   @id @default(cuid())
+  date         DateTime @unique @db.Date
+  wordLength   Int
+  word         String
+  puzzleNumber Int      @unique
+
+  gameAttempts GameAttempt[]
+}
+
+model GameAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  puzzleId    String
+  guesses     Json     @default("[]")
+  status      String   @default("in_progress") // in_progress, won, lost
+  score       Int      @default(0)
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+
+  user   User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  puzzle DailyPuzzle @relation(fields: [puzzleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, puzzleId])
+}
+
+model Group {
+  id         String   @id @default(cuid())
+  name       String
+  inviteCode String   @unique @default(cuid())
+  ownerId    String
+  createdAt  DateTime @default(now())
+  maxMembers Int      @default(50)
+
+  owner   User          @relation("GroupOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members GroupMember[]
+}
+
+model GroupMember {
+  id       String   @id @default(cuid())
+  groupId  String
+  userId   String
+  role     String   @default("member") // owner, member
+  joinedAt DateTime @default(now())
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+}

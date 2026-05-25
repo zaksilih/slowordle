@@ -1,0 +1,23 @@
+// Curated list of common 6-letter Slovenian words used as daily puzzle answers
+export const ANSWERS_6: string[] = [
+  "planet", "beseda", "milosc", "zemlja", "meseca", "oblaki", "zvezda", "pijača", "narava",
+  "morski", "gozdar", "traven", "mestni", "čudovt", "lepota", "stavba", "živali", "rastje",
+  "gozdni", "cestni", "železn", "strela", "učenec", "kolega", "jezero", "narobe", "vojska",
+  "oblast", "sodnik", "cerkev", "branje", "pisava", "glasba", "plačan", "pisati", "kupiti",
+  "dihati", "leteti", "loviti", "služba", "rastli", "tkanin", "snežen", "resnič", "mogočn",
+  "človek", "otroci", "sovrag", "napaka", "dolina", "nevest", "topola", "višina", "kmetij",
+  "veselj", "čarovn", "drznos", "poklic", "prerok", "stotik", "carina", "čipkar", "ribnik",
+  "vrtnar", "dimnik", "frižid", "garaža", "kavarn", "metulj", "nimbus", "oblika", "pahljč",
+  "rokavč", "skrpel", "tanker", "umetni", "vračar", "žandar", "alpski", "balitn", "cestit",
+  "darilo", "eksist", "fleten", "gostin", "hvalež", "izdaja", "junaki", "kamnik", "letalo",
+  "mogila", "nastop", "obramba", "pogled", "rastje", "strast", "tolažb", "umetno", "vezati",
+  "zaklad", "bitnik", "cigara", "dotika", "ekolog", "fasada", "grozdj", "harmon", "iglast",
+  "jahačk", "kozarč", "lovski", "merilo", "navdih", "očetov", "pastir", "ribiči", "stolec",
+  "tombol", "ukvarj", "veselo", "zavist", "amulet", "bolnik", "čolnar", "drznost", "emigr",
+  "frfotj", "grmeti", "himera", "izgled", "jadran", "kosilo", "letnik", "modras", "nadzor",
+  "oddalj", "plutaj", "razboj", "stekel", "tikati", "utrdba", "vlačit", "zahrbt", "arnaut",
+  "bučati", "črepin", "dobrot", "enačaj", "ferman", "greben", "hladen", "igračk", "jeseni",
+  "klečat", "lipica", "mazilo", "naglas", "obleka", "pecivo", "recitn", "siliti", "trebuh",
+  "ugnati", "vetrič", "začimb", "banket", "črtast", "dosežk", "eliksir", "fotoap", "goniti",
+  "hudnik", "igrišč", "jamski", "kamnit", "ličiti", "modrec", "naivno", "opustš", "pirovo",
+];
