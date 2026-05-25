@@ -64,7 +64,7 @@ export async function GET(request: Request) {
       .sort((a: { totalScore: number }, b: { totalScore: number }) => b.totalScore - a.totalScore);
 
     // Find current user's rank
-    const myRank = scoreboard.findIndex((e) => e.userId === session.user!.id) + 1;
+    const myRank = scoreboard.findIndex((e: { userId: string }) => e.userId === session.user!.id) + 1;
 
     return NextResponse.json({ scoreboard, period, myRank });
   } catch {

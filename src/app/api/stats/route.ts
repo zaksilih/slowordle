@@ -30,8 +30,8 @@ export async function GET(request: Request) {
     });
 
     const gamesPlayed = attempts.length;
-    const gamesWon = attempts.filter((a) => a.status === "won").length;
-    const totalScore = attempts.reduce((sum, a) => sum + a.score, 0);
+    const gamesWon = attempts.filter((a: typeof attempts[number]) => a.status === "won").length;
+    const totalScore = attempts.reduce((sum: number, a: typeof attempts[number]) => sum + a.score, 0);
     const winRate = gamesPlayed > 0 ? Math.round((gamesWon / gamesPlayed) * 100) : 0;
 
     // Guess distribution (1-6)
@@ -46,7 +46,7 @@ export async function GET(request: Request) {
     }
 
     // Recent games
-    const recentGames = attempts.slice(0, 10).map((a) => ({
+    const recentGames = attempts.slice(0, 10).map((a: typeof attempts[number]) => ({
       puzzleNumber: a.puzzle.puzzleNumber,
       date: a.puzzle.date,
       wordLength: a.puzzle.wordLength,
