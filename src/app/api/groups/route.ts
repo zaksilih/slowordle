@@ -22,7 +22,7 @@ export async function GET() {
       },
     });
 
-    const groups = memberships.map((m) => ({
+    const groups = memberships.map((m: typeof memberships[number]) => ({
       id: m.group.id,
       name: m.group.name,
       inviteCode: m.group.inviteCode,

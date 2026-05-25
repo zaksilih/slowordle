@@ -43,7 +43,7 @@ export async function GET(request: Request, { params }: RouteParams) {
     const { startDate, endDate } = getDateRange(period);
 
     // Get all game attempts for members in the date range
-    const memberIds = members.map((m) => m.user.id);
+    const memberIds = members.map((m: typeof members[number]) => m.user.id);
     const attempts = await prisma.gameAttempt.findMany({
       where: {
         userId: { in: memberIds },
@@ -59,11 +59,11 @@ export async function GET(request: Request, { params }: RouteParams) {
     });
 
     // Build scoreboard
-    const scoreboard = members.map((m) => {
-      const userAttempts = attempts.filter((a) => a.userId === m.user.id);
-      const totalScore = userAttempts.reduce((sum, a) => sum + a.score, 0);
+    const scoreboard = members.map((m: typeof members[number]) => {
+      const userAttempts = attempts.filter((a: typeof attempts[number]) => a.userId === m.user.id);
+      const totalScore = userAttempts.reduce((sum: number, a: typeof attempts[number]) => sum + a.score, 0);
       const gamesPlayed = userAttempts.length;
-      const gamesWon = userAttempts.filter((a) => a.status === "won").length;
+      const gamesWon = userAttempts.filter((a: typeof attempts[number]) => a.status === "won").length;
 
       return {
         userId: m.user.id,
