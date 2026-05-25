@@ -35,7 +35,10 @@ export default function LoginPage() {
 
   return (
     <div className="flex-1 flex items-center justify-center p-4">
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm relative">
+        <Link href="/" className="absolute -top-2 right-0 text-gray-400 hover:text-white text-2xl leading-none" aria-label="Zapri">
+          &times;
+        </Link>
         <h1 className="text-2xl font-bold text-center mb-8">Prijava</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
