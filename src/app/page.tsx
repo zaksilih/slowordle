@@ -5,6 +5,7 @@ import GameBoard from "@/components/GameBoard";
 import Keyboard from "@/components/Keyboard";
 import Header from "@/components/Header";
 import GameOverModal from "@/components/GameOverModal";
+import InstructionsModal from "@/components/InstructionsModal";
 import type { LetterResult } from "@/lib/game-logic";
 
 interface GuessEntry {
@@ -30,6 +31,7 @@ export default function Home() {
   const [shakeRow, setShakeRow] = useState(false);
   const [username, setUsername] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(true);
 
   // Fetch today's game state
   useEffect(() => {
@@ -188,6 +190,10 @@ export default function Home() {
           wordLength={gameState.wordLength}
           onClose={() => setShowModal(false)}
         />
+      )}
+
+      {showInstructions && !showModal && (
+        <InstructionsModal onClose={() => setShowInstructions(false)} />
       )}
     </div>
   );
