@@ -1,12 +1,21 @@
 import { getAnswerList } from "@/data";
 
+const TIMEZONE = "Europe/Ljubljana";
+
 /**
- * Deterministically select the daily word based on date and a secret salt.
+ * Get today's date string (YYYY-MM-DD) in Ljubljana timezone.
+ */
+export function getTodayDateStr(): string {
+  const now = new Date();
+  return now.toLocaleDateString("en-CA", { timeZone: TIMEZONE }); // en-CA gives YYYY-MM-DD
+}
+
+/**
+ * Deterministically select the daily word based on date string and a secret salt.
  * This ensures the same word is selected for all users on the same day.
  */
-export function getDailyWord(date: Date, salt: string): { word: string; wordLength: number; puzzleNumber: number } {
-  const dateStr = date.toISOString().split("T")[0]; // YYYY-MM-DD
-  const puzzleNumber = getPuzzleNumber(date);
+export function getDailyWord(dateStr: string, salt: string): { word: string; wordLength: number; puzzleNumber: number } {
+  const puzzleNumber = getPuzzleNumber(dateStr);
   const wordLength = getWordLength(dateStr, salt);
   const answers = getAnswerList(wordLength);
   const index = hashToIndex(dateStr + salt, answers.length);
@@ -34,11 +43,11 @@ function getWordLength(dateStr: string, salt: string): number {
  * Get puzzle number (days since the app launched).
  * Day 1 = 2026-05-25 (launch date).
  */
-function getPuzzleNumber(date: Date): number {
-  // Use local-time constructor to match the date parameter (which uses local midnight)
-  const epoch = new Date(2026, 4, 25); // May 25, 2026 (month is 0-indexed)
-  const diffTime = date.getTime() - epoch.getTime();
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+function getPuzzleNumber(dateStr: string): number {
+  const epochMs = Date.UTC(2026, 4, 25); // May 25, 2026 UTC midnight
+  const [year, month, day] = dateStr.split("-").map(Number);
+  const currentMs = Date.UTC(year, month - 1, day);
+  const diffDays = Math.floor((currentMs - epochMs) / (1000 * 60 * 60 * 24));
   return diffDays + 1;
 }
 

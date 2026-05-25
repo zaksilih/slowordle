@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { getDailyWord, evaluateGuess, calculateScore } from "@/lib/game-logic";
+import { getDailyWord, evaluateGuess, calculateScore, getTodayDateStr } from "@/lib/game-logic";
 import { isValidWord } from "@/data";
 
 const GAME_SALT = process.env.GAME_SALT || "slovvordle-default-salt-2024";
@@ -28,9 +28,9 @@ export async function POST(request: Request) {
     const normalizedGuess = guess.toLowerCase().trim();
 
     // Get today's puzzle
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const { word, wordLength, puzzleNumber } = getDailyWord(today, GAME_SALT);
+    const todayStr = getTodayDateStr();
+    const todayDate = new Date(todayStr + "T00:00:00.000Z");
+    const { word, wordLength, puzzleNumber } = getDailyWord(todayStr, GAME_SALT);
 
     // Validate guess length matches today's word length
     if (normalizedGuess.length !== wordLength) {
@@ -50,10 +50,10 @@ export async function POST(request: Request) {
 
     // Ensure puzzle record exists
     const puzzle = await prisma.dailyPuzzle.upsert({
-      where: { date: today },
+      where: { date: todayDate },
       update: {},
       create: {
-        date: today,
+        date: todayDate,
         wordLength,
         word,
         puzzleNumber,

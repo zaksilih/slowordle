@@ -1,30 +1,30 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { getDailyWord } from "@/lib/game-logic";
+import { getDailyWord, getTodayDateStr } from "@/lib/game-logic";
 
 const GAME_SALT = process.env.GAME_SALT || "slovvordle-default-salt-2024";
 
 export async function GET() {
   try {
     const session = await auth();
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const todayStr = getTodayDateStr();
+    const todayDate = new Date(todayStr + "T00:00:00.000Z");
 
-    const { wordLength, puzzleNumber } = getDailyWord(today, GAME_SALT);
+    const { wordLength, puzzleNumber } = getDailyWord(todayStr, GAME_SALT);
 
     // Ensure DailyPuzzle record exists
     let puzzle = await prisma.dailyPuzzle.findUnique({
-      where: { date: today },
+      where: { date: todayDate },
     });
 
     if (!puzzle) {
-      const { word } = getDailyWord(today, GAME_SALT);
+      const { word } = getDailyWord(todayStr, GAME_SALT);
       puzzle = await prisma.dailyPuzzle.upsert({
-        where: { date: today },
+        where: { date: todayDate },
         update: {},
         create: {
-          date: today,
+          date: todayDate,
           wordLength,
           word,
           puzzleNumber,
