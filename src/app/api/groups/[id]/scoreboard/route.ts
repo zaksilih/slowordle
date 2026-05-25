@@ -79,7 +79,7 @@ export async function GET(request: Request, { params }: RouteParams) {
     });
 
     // Sort by total score descending
-    scoreboard.sort((a, b) => b.totalScore - a.totalScore);
+    scoreboard.sort((a: { totalScore: number }, b: { totalScore: number }) => b.totalScore - a.totalScore);
 
     return NextResponse.json({ scoreboard, period });
   } catch {

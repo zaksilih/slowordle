@@ -61,7 +61,7 @@ export async function GET(request: Request) {
         ...entry,
         winRate: entry.gamesPlayed > 0 ? Math.round((entry.gamesWon / entry.gamesPlayed) * 100) : 0,
       }))
-      .sort((a, b) => b.totalScore - a.totalScore);
+      .sort((a: { totalScore: number }, b: { totalScore: number }) => b.totalScore - a.totalScore);
 
     // Find current user's rank
     const myRank = scoreboard.findIndex((e) => e.userId === session.user!.id) + 1;
